@@ -19,6 +19,8 @@
   <!-- Style -->
   <link rel="stylesheet" href="css/style.css" />
 
+  <!-- VUE Js -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <!-- JavaScript -->
   <script src="js/data.js"></script>
   <script defer src="js/script.js"></script>
@@ -26,36 +28,39 @@
 </head>
 
 <body>
-
   <div class="container">
-    <div id="carousel">
-      <!-- Prev button -->
-      <i id="prev-button" class="bi bi-arrow-left-circle-fill" role="button"></i>
-
-      <!-- Gallery -->
-      <div class="gallery">
-        <figure class="active">
-          <figcaption>
-            <h2>Svezia</h2>
-            <h3>Scandinavia's blend of nature and innovation.</h3>
-          </figcaption>
-          <img src="img/01.jpg" alt="Svezia">
-        </figure>
+    <div id="root">
+      <div id="carousel">
+        <!-- Prev button -->
+        <i id="prev-button" class="bi bi-arrow-left-circle-fill" role="button"></i>
+  
+        <!-- Gallery -->
+        <div class="gallery">
+          <figure v-for="(pic, i) of pictures" :class="{active: i === currentIndex}">
+            <figcaption>
+              <h2>{{pic.name}}</h2>
+              <h3>{{pic.description}}</h3>
+            </figcaption>
+            <img :src="`img/${pic.image}`" :alt="pic.name">
+          </figure>
+        </div>
+  
+        <!-- next button -->
+        <i id="next-button" class="bi bi-arrow-right-circle-fill" role="button"></i>
       </div>
-
-      <!-- next button -->
-      <i id="next-button" class="bi bi-arrow-right-circle-fill" role="button"></i>
-    </div>
-
-    <!-- Thumbnails -->
-    <div id="thumbnails">
-      <img src="img/01.jpg" alt="Svezia" class="active">
-    </div>
-
-    <!-- <div class="autoplay-controls">
-      <button id="autoplay-button">STOP AUTOPLAY</button>
-    </div> -->
+  
+      <!-- Thumbnails -->
+      <div id="thumbnails">
+        <img v-for="(pic, i) of pictures" :src="`img/${pic.image}`" 
+        :alt="pic.name" :class="{active: i === currentIndex}">
+      </div>
+  
+      <!-- <div class="autoplay-controls">
+        <button id="autoplay-button">STOP AUTOPLAY</button>
+      </div> -->
+    </div>>   
   </div>
+
 </body>
 
 </html>
