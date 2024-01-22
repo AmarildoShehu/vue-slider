@@ -32,12 +32,12 @@
     <div id="root">
       <div id="carousel">
         <!-- Prev button -->
-        <i v-if="!isFirstIndex" id="prev-button" class="bi bi-arrow-left-circle-fill" role="button" 
-        @:click="goToPrev"></i>
+        <i id="prev-button" class="bi bi-arrow-left-circle-fill" role="button" 
+        @click="setCurrentIndex('prev')"></i>
   
         <!-- Gallery -->
         <div class="gallery">
-          <figure v-for="(pic, i) of pictures" v-show="currentIndex === i">
+          <figure v-for="(pic, i) in pictures" v-show="currentIndex === i">
             <figcaption>
               <h2>{{pic.name}}</h2>
               <h3>{{pic.description}}</h3>
@@ -47,21 +47,21 @@
         </div>
   
         <!-- next button -->
-        <i v-if="!isLastIndex" id="next-button" class="bi bi-arrow-right-circle-fill" role="button"
-        @:click="goToNext"></i>
+        <i id="next-button" class="bi bi-arrow-right-circle-fill" role="button"
+        @click="setCurrentIndex('next')"></i>
       </div>
   
       <!-- Thumbnails -->
       <div id="thumbnails">
-        <img v-for="(pic, i) of pictures" :src="`img/${pic.image}`" 
+        <img v-for="(pic, i) in pictures" :src="`img/${pic.image}`" 
         :alt="pic.name" :class="{active: i === currentIndex}" 
-        @:click="currentIndex = i">
+        @click="setCurrentIndex(i)">
       </div>
   
       <!-- <div class="autoplay-controls">
         <button id="autoplay-button">STOP AUTOPLAY</button>
       </div> -->
-    </div>>   
+    </div>  
   </div>
 
 </body>

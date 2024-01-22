@@ -13,7 +13,7 @@ const app = createApp({
     }),
     computed: {
         lastElementsIndex() {
-            return this.pictures.lenght - 1;
+            return this.pictures.length - 1;
         },
         isFirstIndex() {
             return this.currentIndex === 0;
@@ -23,14 +23,17 @@ const app = createApp({
         }
     },
     methods: {
-        goToPrev(){
-            if(this.isFirstIndex) this.currentIndex = this.lastElementsIndex;
-            else this.currentIndex--;
-        },
-        goToNext() {
-            if(this.isLastIndex) this.currentIndex = 0;
-            else this.currentIndex++;
-        } 
+        setCurrentIndex(location) {
+            if (location === 'next') {
+                if (this.isLastIndex) this.currentIndex = 0;
+                else this.currentIndex++;
+            } else if (location  === 'prev') {
+                if (this.isFirstIndex) this.currentIndex = this.lastElementsIndex;
+                else this.currentIndex--;
+            } else {
+                this.currentIndex = location;
+            }
+        }
     }
 })
 
