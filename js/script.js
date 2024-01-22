@@ -34,6 +34,10 @@ const app = createApp({
                 this.currentIndex = location;
             }
         }
+    },
+    mounted() {
+        setInterval(() => {(this.setCurrentIndex('next'));
+        },  3000);
     }
 })
 
