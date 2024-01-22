@@ -9,7 +9,9 @@ const app = createApp({
     name: 'vueCarousel',
     data: () => ({
         pictures,
-        currentIndex: 0
+        currentIndex: 0,
+        interval: null,
+        autoplay: null
     }),
     computed: {
         lastElementsIndex() {
@@ -32,12 +34,19 @@ const app = createApp({
                 else this.currentIndex--;
             } else {
                 this.currentIndex = location;
-            }
+            }    
+        },
+        stopAutoplay() {
+            clearInterval(this.autoplay)
+        },
+        startAutoplay() {
+            this.autoplay = setInterval(() => {
+                this.setCurrentIndex('next')
+            }, 3000);
         }
     },
     mounted() {
-        setInterval(() => {(this.setCurrentIndex('next'));
-        },  3000);
+        this.startAutoplay();
     }
 })
 
